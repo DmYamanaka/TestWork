@@ -1,0 +1,160 @@
+<ul class="nav nav-tabs" style="margin-left:5% ;">
+  <li class="nav-item">
+    <a class="nav-link " aria-current="page" href=""><h3>О компнии</h3></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="employees"><h3>Сотрудники</h3></a>
+  </li>
+</ul>
+<div style="width:1200px ; margin-left: auto; margin-right: auto;">
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Отдел</th>
+        <th scope="col">ФИО</th>
+        <th scope="col">Дата рождения</th>
+        <th scope="col">Дата устройства на работу</th>
+        <th scope="col">Зарплата</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let e of employees">
+      <tr>
+        <th>{{e.department}}</th>
+        <th>{{e.fio}}</th>
+        <td>{{e.dateOfBirth | date:'dd.MM.yyyy'}}</td>
+        <td>{{e.dateOfEmployment | date:'dd.MM.yyyy'}}</td>
+        <td>{{e.wage}}</td>
+        <td>
+          <button (click)="populateForm(e)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" style="margin-left: auto;">
+          Редактировать
+          </button>
+        </td>
+        <td>
+          <button (click)="populateForm(e)" type="button" class="btn-danger btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: auto;">
+    Добавить нового сотрудника
+  </button>
+  </div>
+  
+  <!-- Окно добавления -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Добавление сотрудника</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form style="width: 300px ; margin-right:auto; margin-left: auto;">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Отдел</label>
+              <input type="text" value=" " class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="employee.department" name="department">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">ФИО</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.fio" name="fio">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Дата рождения</label>
+              <input type="date" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.dateOfBirth" name="dateOfBirth">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Дата устройства на работу</label>
+              <input type="date" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.dateOfEmployment" name="dateOfEmployment">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Зарплата</label>
+              <input type="number" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.wage" name="wage">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addEmplyee()">Добавить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Окно редактирования -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Редактирование сотрудника</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clinForm()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Отдел</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.department" name="department">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">ФИО</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.fio" name="fio">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Дата рождения</label>
+            <input type="date" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.dateOfBirth" name="dateOfBirth">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Дата устройства на работу</label>
+            <input type="date" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.dateOfEmployment" name="dateOfEmployment">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Зарплата</label>
+            <input type="number" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.wage" name="wage">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clinForm()">Отмена</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateEmployee(employee)">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Удалить сотрудника?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clinForm()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Отдел</label>
+            <input disabled type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.department" name="department">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">ФИО</label>
+            <input disabled type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.fio" name="fio">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Дата рождения</label>
+            <input disabled type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.dateOfBirth" name="dateOfBirth">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Дата устройства на работу</label>
+            <input disabled type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.dateOfEmployment" name="dateOfEmployment">
+          </div>
+          <div class="mb-3" style="width:400px ; margin-right:auto; margin-left:auto;">
+            <label for="exampleInputPassword1" class="form-label">Зарплата</label>
+            <input disabled type="number" class="form-control" id="exampleInputPassword1" [(ngModel)]="employee.wage" name="wage">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clinForm()">Отмена</button>
+          <button type="button" class="btn-danger btn btn-primary" data-bs-dismiss="modal" (click)="deleteEmployee(employee.id)">Удалить</button>
+        </div>
+      </div>
+    </div>
+  </div> 
