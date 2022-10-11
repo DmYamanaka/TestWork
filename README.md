@@ -1,5 +1,5 @@
 # TestWork
-Первое приложение с использованием Angular
+Моё первое приложение с использованием Angular
 
 ![image](https://user-images.githubusercontent.com/54627640/195183767-5084a41e-681c-44fb-a84b-64c98d852a22.png)
 
